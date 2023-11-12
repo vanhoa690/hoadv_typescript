@@ -1,19 +1,30 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
+type Product = {
+    title: string
+}
 const HomePage = () => {
-  // function fetchProducts () {}
+  const [productList, setProductList] = useState<Product[]>([]);
 
-  const fetchProducts = () => {
-    const data = axios.get('https://fakestoreapi.com/products');
-    console.log({ data });
+  const fetchProducts = async () => {
+    const { data } = await axios.get('https://fakestoreapi.com/products');
+    setProductList(data);
   };
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  return <div>Homepage</div>;
+  console.log('result', productList);
+
+  return (
+    <div>
+      {productList.map((product, index) => (
+        <div key={index}>{product.title}</div>
+      ))}
+    </div>
+  );
 };
 
 export default HomePage;
