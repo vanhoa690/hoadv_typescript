@@ -18,7 +18,7 @@ const HomePage = () => {
   console.log('result', productList);
 
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap mx-auto container">
       {productList.map((product, index) => (
         <ProductCard key={index} product={product} />
       ))}
