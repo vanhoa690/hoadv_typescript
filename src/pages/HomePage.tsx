@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Header } from '../components/elements/Header';
+// import { Header } from '../components/elements/Header';
+import { Link } from 'react-router-dom';
 
 type Product = {
+  id: number
   title: string;
   image: string;
   price: number;
@@ -21,7 +23,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
     
     <div className="container mx-auto py-4 text-center">
       <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
@@ -31,13 +33,13 @@ const HomePage = () => {
         {productList.map((product, index) => (
           <div key={index}>
             <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <a href="#">
+              <Link to={`/products/${product.id}`}>
                 <img
                   className="p-8 rounded-t-lg h-96 object-contain mx-auto"
                   src={product.image}
                   alt="product image"
                 />
-              </a>
+              </Link>
               <div className="px-5 pb-5">
                 <a href="#">
                   <h5 className="h-24 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">

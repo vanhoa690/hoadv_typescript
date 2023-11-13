@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export const Header = () => {
   return (
     <header className="bg-white">
@@ -5,14 +7,14 @@ export const Header = () => {
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global">
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link to="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img
               className="h-8 w-auto"
               src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
               alt=""
             />
-          </a>
+          </Link>
         </div>
         <div className="flex gap-6">
           <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
