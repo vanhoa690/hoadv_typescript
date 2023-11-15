@@ -17,7 +17,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <div className="px-5 pb-5">
                 <a href="#">
                     <h5 className="h-24 text-xl font-semibold tracking-tight text-gray-900 dark:text-white text-center">
-                        {product.name}
+                        {product.title}
                     </h5>
                 </a>
                 <div className="flex items-center mt-2.5 mb-5">
