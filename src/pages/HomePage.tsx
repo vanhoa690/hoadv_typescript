@@ -11,9 +11,8 @@ const HomePage = () => {
       const { data } = await axios.get('https://fakestoreapi.com/products');
       setProductList(data);
     } catch (error) {
-      
+      console.log(error);
     }
-   
   };
 
   useEffect(() => {
