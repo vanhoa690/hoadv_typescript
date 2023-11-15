@@ -7,18 +7,21 @@ const HomePage = () => {
   const [productList, setProductList] = useState<Product[]>([]);
 
   const fetchProducts = async () => {
-    const { data } = await axios.get('https://fakestoreapi.com/products');
-    setProductList(data);
+    try {
+      const { data } = await axios.get('https://fakestoreapi.com/products');
+      setProductList(data);
+    } catch (error) {
+      
+    }
+   
   };
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  console.log('result', productList);
-
   return (
-    <div className="flex flex-wrap mx-auto container">
+    <div className="flex flex-wrap justify-center gap-6">
       {productList.map((product, index) => (
         <ProductCard key={index} product={product} />
       ))}
