@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { Product } from "../types/Product";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AdminProductList = () => {
+  const navigate = useNavigate();
   const [productList, setProductList] = useState<Product[]>([]);
 
   const fetchProducts = async () => {
@@ -18,15 +20,19 @@ const AdminProductList = () => {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return navigate("/login");
     fetchProducts();
   }, []);
 
   const handleRemoveProduct = async (id: string) => {
     try {
       // confirm dialog
-      await axios.delete(`/products/${id}`);
-      fetchProducts();
-      toast.success("Delete Successfull - " + id);
+      if (window.confirm("Do you really remove product?")) {
+        await axios.delete(`/products/${id}`);
+        fetchProducts();
+        toast.success("Delete Successfull - " + id);
+      }
     } catch (error) {
       toast.error("Delete Failed - " + error);
     }

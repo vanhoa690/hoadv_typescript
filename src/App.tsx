@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AdminProductList from './pages/AdminProductList';
-import AdminCreatProduct from './pages/AdminCreatProduct';
+import AdminCreateProduct from './pages/AdminCreateProduct';
 
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
@@ -25,7 +25,7 @@ function App() {
         </Route>
         <Route path="/" element={<AdminLayout />}>
           <Route path="/admin/products" element={<AdminProductList />} />
-          <Route path="/admin/products/create" element={<AdminCreatProduct />} />
+          <Route path="/admin/products/create" element={<AdminCreateProduct />} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
       </Routes>

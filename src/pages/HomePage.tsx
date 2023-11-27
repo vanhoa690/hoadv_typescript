@@ -8,7 +8,7 @@ const HomePage = () => {
 
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get('https://fakestoreapi.com/products');
+      const { data } = await axios.get('/');
       setProductList(data);
     } catch (error) {
       console.log(error);
