@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Product } from "../types/Product";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const AdminProductList = () => {
   const [productList, setProductList] = useState<Product[]>([]);
@@ -12,6 +13,7 @@ const AdminProductList = () => {
       setProductList(data);
     } catch (error) {
       console.log(error);
+      toast.error("Get Product List Failed - " + error);
     }
   };
 
@@ -21,6 +23,7 @@ const AdminProductList = () => {
 
   const handleRemoveProduct = async (id: string) => {
     try {
+      // confirm dialog
       await axios.delete(`/products/${id}`);
       fetchProducts();
       toast.success("Delete Successfull - " + id);
@@ -34,7 +37,11 @@ const AdminProductList = () => {
       <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
         Product List
       </h1>
-
+      <Link to={"/admin/products/create"}>
+        <button className="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Create New Product
+        </button>
+      </Link>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
