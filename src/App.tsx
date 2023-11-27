@@ -6,7 +6,7 @@ import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import Layout from './components/elements/Layout';
-import {configureAxios} from './config/axios'
+import { configureAxios } from './config/axios'
 
 configureAxios()
 
@@ -18,6 +18,8 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/products/:productId" element={<ProductDetailPage />} />
           <Route path="/" element={<HomePage />} />
+        </Route>
+        <Route path="/" element={<Layout />}>
           <Route path="/admin/products" element={<AdminProductList />} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
