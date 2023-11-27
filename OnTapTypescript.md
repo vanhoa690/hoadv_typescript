@@ -1,10 +1,10 @@
-run 
+## run 
 ts-node tenfile.ts
 
 tsc - build ta ca file ts sang js
 tsc tenfile.ts - build file ts sang js
 
-https://www.tutorialsteacher.com/typescript/typescript-number
+## https://www.tutorialsteacher.com/typescript/typescript-number
 
 
 type Student = {
@@ -12,20 +12,20 @@ type Student = {
 };
 
 const student = {};
-//Javascript
-// Number String ||  &&   . ts | & 
+Javascript
+Number String ||  &&   . ts | & 
 
-//kieu du lieu: number string boolean null undefined any void never unknown
+## kieu du lieu: number string boolean null undefined any void never unknown
 
 let fruits: (string | number)[] = ['Apple', 'Orange', 'Banana'];
 
 let fruits2: Array<string | number> = ['Apple', 'Orange', 'Banana', 1];
 
-//Tuples
+## Tuples
 let person: [number, string, boolean, number] = [1, 'Steve', true, 1];
 
-//Enum (const)
-// enum number
+## Enum (const)
+### enum number
 enum PrintMedia {
   Newspaper = 2,
   Newsletter = 1,
@@ -33,7 +33,7 @@ enum PrintMedia {
   Book,
 }
 
-// enum string
+### enum string
 enum PrintMedia2 {
   Newspaper = 'Newspaper',
   Newsletter = 'Newsletter',
@@ -46,52 +46,50 @@ status === PrintMedia.Newsletter;
 const status2 = 'Newsletter';
 status2 === PrintMedia2.Newsletter;
 
-// || JS
-// Union | TS
+## Union | TS
 let code: string | number;
 
-// &&
-//Intersection type &
+## Intersection type &
 type Student2 = Student & { age: number };
 
-// Any
+### Any
 let something: any = 'Hello World!';
 something = true;
 
-// void
+### void
 function sayHi(): void {
   console.log('Hi!');
-  // return
+  // no return
 }
 
-//  onChange: () => void
+onChange: () => void
 
-//Generics <>
+## Generics <>
 Array<number>
-// useState<number>
+useState<number>
 
-// Literal types
+## Literal types
 type Gt = 'nam' | 'nu'
 const gioiTinh: Gt = 'nam'
 
-//never 
+### never 
 let a: string & number = 1
 
-// unknown
+### unknown
 
-//Utility Types
+## Utility Types
 
-// Partial  (?) chuyen ve optional
+## Partial  (?) chuyen ve optional
 type Student3 = {
   id: number
 }
 
 type Student4 = Partial<Student3>
-// {
-//   id?: number
-// }
+{
+  id?: number
+}
 
-//Required chuyen ve required
+## Required chuyen ve required
 type Student5 = {
   id?: number
   age: number
@@ -99,17 +97,17 @@ type Student5 = {
 }
 
 type Student6 = Required<Student5>
-// {
-//   id: number
-// }
+ {
+   id: number
+ }
 
-//Pick lay type
+## Pick lay type
 type Student7 = Pick<Student5, 'age' | 'gioiTinh'>
 
-// Omit bo qua type
+## Omit bo qua type
 type Student8 = Omit<Student6, 'gioiTinh'>
 
-// Casting  as 
+## Casting: as 
 interface User {
   name: string;
   age: number;
