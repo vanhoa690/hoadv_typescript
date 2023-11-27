@@ -6,6 +6,9 @@ import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import Layout from './components/elements/Layout';
+import {configureAxios} from './config/axios'
+
+configureAxios()
 
 function App() {
   return (

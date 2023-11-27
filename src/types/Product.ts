@@ -4,7 +4,7 @@ type ProductRate = {
 };
 
 export type Product = {
-  id: number;
+  _id: string;
   title: string;
   image: string;
   price: number;
