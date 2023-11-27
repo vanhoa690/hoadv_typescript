@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 type AccountInfo = {
   email: string
@@ -23,10 +24,12 @@ const LoginPage = () => {
     event.preventDefault()
     try {
       const { data } = await axios.post('https://hoadv-nodejs.vercel.app/auth/login', accountInfo)
+      toast("Login Successfull!")
       localStorage.setItem('token', data.token);
       navigate('/admin/products')
 
     } catch (error) {
+      toast.error("Login Failed!" + error)
       console.log(error);
     }
   }
@@ -38,6 +41,7 @@ const LoginPage = () => {
           <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Sign in to your account
           </h1>
+          <button onClick={() => toast("Login Successfull!")}>Toast</button>
           <form className="space-y-4 md:space-y-6" onSubmit={handleSubmitForm}>
             <div>
               <label
@@ -116,6 +120,7 @@ const LoginPage = () => {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
