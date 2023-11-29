@@ -30,7 +30,7 @@ const LoginPage = () => {
     // validate show error
     try {
       const { data } = await axios.post(
-        "https://hoadv-nodejs.vercel.app/auth/login",
+        "/auth/login",
         accountInfo
       );
       toast.success("Login Successfull!");

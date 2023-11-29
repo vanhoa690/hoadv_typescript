@@ -1,18 +1,19 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import AdminProductList from './pages/AdminProductList';
-import AdminCreateProduct from './pages/AdminCreateProduct';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import AdminProductList from "./pages/AdminProductList";
+import AdminCreateProduct from "./pages/AdminCreateProduct";
+import AdminEditProduct from "./pages/AdminEditProduct";
 
-import LoginPage from './pages/LoginPage';
-import ProfilePage from './pages/ProfilePage';
-import ProductDetailPage from './pages/ProductDetailPage';
-import Layout from './components/elements/Layout';
-import AdminLayout from './components/elements/AdminLayout';
+import LoginPage from "./pages/LoginPage";
+import ProfilePage from "./pages/ProfilePage";
+import ProductDetailPage from "./pages/ProductDetailPage";
+import Layout from "./components/elements/Layout";
+import AdminLayout from "./components/elements/AdminLayout";
 
-import { configureAxios } from './config/axios'
-import 'react-toastify/dist/ReactToastify.css';
+import { configureAxios } from "./config/axios";
+import "react-toastify/dist/ReactToastify.css";
 
-configureAxios()
+configureAxios();
 
 function App() {
   return (
@@ -25,7 +26,14 @@ function App() {
         </Route>
         <Route path="/" element={<AdminLayout />}>
           <Route path="/admin/products" element={<AdminProductList />} />
-          <Route path="/admin/products/create" element={<AdminCreateProduct />} />
+          <Route
+            path="/admin/products/create"
+            element={<AdminCreateProduct />}
+          />
+          <Route
+            path="/admin/products/edit/:productId"
+            element={<AdminEditProduct />}
+          />
         </Route>
         <Route path="/login" element={<LoginPage />} />
       </Routes>

@@ -1,18 +1,12 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
+import { ProductFormParams } from "../types/Product";
+import { Category } from "../types/Category";
 
-type ProductFormParams = {
-  title: string;
-  category: string;
-  image: string;
-  price: number;
-  rate: number;
-  description: string;
-};
 const AdminCreateProduct = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [productAdd, setProductAdd] = useState<ProductFormParams>({
     title: "",
     category: "",
@@ -21,8 +15,24 @@ const AdminCreateProduct = () => {
     rate: 0,
     description: "",
   });
+  const [categoryList, setCategoryList] = useState<Category[]>([]);
 
-  const handleChangeForm = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const fetchCategoryList = async () => {
+    try {
+      const { data } = await axios.get("/categories");
+      setCategoryList(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategoryList();
+  }, []);
+
+  const handleChangeForm = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setProductAdd({ ...productAdd, [event.target.name]: event.target.value });
   };
   const handleSubmitForm = async (event: React.SyntheticEvent) => {
@@ -31,9 +41,9 @@ const AdminCreateProduct = () => {
     try {
       await axios.post("/products", productAdd);
       toast.success("Add Product Successfull!");
-        navigate("/admin/products");
+      navigate("/admin/products");
     } catch (error) {
-      toast.error("Login Failed! - " + error);
+      toast.error("Add Product Failed! - " + error);
       console.log(error);
     }
   };
@@ -86,14 +96,35 @@ const AdminCreateProduct = () => {
               >
                 Category
               </label>
-              <input
+              <select
+                id="category"
                 value={productAdd.category}
                 onChange={handleChangeForm}
-                type="text"
-                name="category"
-                id="category"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="Type product Category"
+                name={"category"}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              >
+                <option value={""}>Select category</option>
+                {categoryList.map((category, index) => (
+                  <option key={index} value={category._id}>
+                    {category.title}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="sm:col-span-2">
+              <label
+                htmlFor="description"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Description
+              </label>
+              <input
+                value={productAdd.description}
+                onChange={handleChangeForm}
+                name="description"
+                id="description"
+                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Your description here"
               />
             </div>
             <div className="w-full">
@@ -113,7 +144,6 @@ const AdminCreateProduct = () => {
                 placeholder="$2999"
               />
             </div>
-
             <div>
               <label
                 htmlFor="item-weight"
@@ -128,22 +158,6 @@ const AdminCreateProduct = () => {
                 name="rate"
                 id="rate"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              />
-            </div>
-            <div className="sm:col-span-2">
-              <label
-                htmlFor="description"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Description
-              </label>
-              <input
-                value={productAdd.description}
-                onChange={handleChangeForm}
-                name="description"
-                id="description"
-                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="Your description here"
               />
             </div>
           </div>

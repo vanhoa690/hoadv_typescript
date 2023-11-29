@@ -86,9 +86,12 @@ const AdminProductList = () => {
                 <td className="px-6 py-4">$ {product.price}</td>
                 <td className="px-6 py-4">
                   <div className="flex gap-2">
-                    <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                      Edit
-                    </button>
+                    <Link to={`/admin/products/edit/${product._id}`}>
+                      <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                        Edit
+                      </button>
+                    </Link>
+
                     <button
                       onClick={() => handleRemoveProduct(product._id)}
                       className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
