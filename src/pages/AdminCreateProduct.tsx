@@ -15,6 +15,7 @@ const AdminCreateProduct = () => {
     rate: 0,
     description: "",
   });
+  
   const [categoryList, setCategoryList] = useState<Category[]>([]);
 
   const fetchCategoryList = async () => {
@@ -35,6 +36,7 @@ const AdminCreateProduct = () => {
   ) => {
     setProductAdd({ ...productAdd, [event.target.name]: event.target.value });
   };
+
   const handleSubmitForm = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     // validate show error

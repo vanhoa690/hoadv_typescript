@@ -1,5 +1,5 @@
 ## React
-- useState<type> : [name, setName] = useState('') : luu du lieu
+- useState<type> : [name, setName] = useState<type>('') : luu du lieu
 - useEffect: (() => {
     - call api
     - set state
@@ -23,12 +23,12 @@
 ## Admin Product List
 - UI
 - State: luu tru List
-- useEffect: call api, set state
+- useEffect: call api getList, set state
 - List => map UI, button: Edit, Remove
 - Remove: handleRemoveProduct(productID) -> onClick
 - Confirm: OK
-- try catch: 
-- OK:call lai api list (# ko can dung filter)
+- try catch: axios.delete(api_url+ productId)
+- OK:call api getList list (# ko can dung filter)
 - Catch error: fix bug
 
 ## Add Product
