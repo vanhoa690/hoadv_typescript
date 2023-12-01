@@ -10,11 +10,6 @@ export type Product = {
   rate: number;
 };
 
-export type ProductFormParams = {
-  title: string;
-  image: string;
+export type ProductFormParams = Omit<Product, "_id" | "category"> & {
   category: string;
-  description: string;
-  price: number;
-  rate: number;
 };

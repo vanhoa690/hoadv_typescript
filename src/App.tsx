@@ -24,14 +24,14 @@ function App() {
           <Route path="/products/:productId" element={<ProductDetailPage />} />
           <Route path="/" element={<HomePage />} />
         </Route>
-        <Route path="/" element={<AdminLayout />}>
-          <Route path="/admin/products" element={<AdminProductList />} />
+        <Route path="/admin/" element={<AdminLayout />}>
+          <Route path="products" element={<AdminProductList />} />
           <Route
-            path="/admin/products/create"
+            path="products/create"
             element={<AdminCreateProduct />}
           />
           <Route
-            path="/admin/products/edit/:productId"
+            path="products/edit/:productId"
             element={<AdminEditProduct />}
           />
         </Route>

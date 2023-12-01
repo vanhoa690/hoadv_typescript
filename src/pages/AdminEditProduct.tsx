@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
-import { Product, ProductFormParams } from "../types/Product";
+import { ProductFormParams } from "../types/Product";
 import { Category } from "../types/Category";
 
 const AdminEditProduct = () => {
@@ -19,7 +19,6 @@ const AdminEditProduct = () => {
     description: "",
   });
 
-  const [productDetail, setProductDetail] = useState<Product | null>(null);
   const [categoryList, setCategoryList] = useState<Category[]>([]);
 
   const fetchProductAndCategoryList = async (id: string) => {
@@ -28,24 +27,19 @@ const AdminEditProduct = () => {
         [axios.get("/categories"), axios.get(`/products/${id}`)]
       );
       setCategoryList(categoriesRes);
-      setProductDetail(productRes);
+      const { title, image, description, rate, price, category } = productRes;
+      setProductEdit({
+        title,
+        image,
+        description,
+        rate,
+        price,
+        category: category._id,
+      });
     } catch (error) {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    if (!productDetail) return;
-    const { title, image, description, rate, price, category } = productDetail;
-    setProductEdit({
-      title,
-      image,
-      description,
-      rate,
-      price,
-      category: category._id,
-    });
-  }, [productDetail]);
 
   useEffect(() => {
     if (!productId) return;
