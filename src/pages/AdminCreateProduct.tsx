@@ -14,10 +14,6 @@ const AdminCreateProduct = () => {
     const file = e.target.files && e.target.files[0];
     if (!file) return;
     setFile(file);
-    handleChangedProductImage(file);
-  };
-
-  const handleChangedProductImage = (file: File) => {
     const fileReader = new FileReader();
     fileReader.onload = () => setImageUrl(fileReader.result as string);
     fileReader.readAsDataURL(file);
@@ -31,7 +27,7 @@ const AdminCreateProduct = () => {
     rate: 0,
     description: "",
   });
-  
+
   const [categoryList, setCategoryList] = useState<Category[]>([]);
 
   const fetchCategoryList = async () => {
@@ -56,15 +52,15 @@ const AdminCreateProduct = () => {
   const handleSubmitForm = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     // validate show error
+    let imageUrl = productAdd.image;
     try {
       if (file) {
         const formData = new FormData();
         formData.append("image", file);
         const { data } = await axios.post("/upload/single/clound", formData);
-        await axios.post("/products", { ...productAdd, image: data.imageUrl });
-      } else {
-        await axios.post("/products", productAdd);
+        imageUrl = data.imageUrl;
       }
+      await axios.post("/products", { ...productAdd, image: imageUrl });
       toast.success("Add Product Successfull!");
       navigate("/admin/products");
     } catch (error) {
